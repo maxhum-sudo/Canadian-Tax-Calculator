@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canada Tax Account Optimizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Canada Tax Account Optimizer</h1>
+            <p class="subtitle">Optimize your contributions to TFSA, RRSP, FHSA, and RESP</p>
+        </header>
+
+        <main>
+            <!-- Part 1: Main Inputs -->
+            <section class="input-section" id="part1">
+                <h2>Part 1: Basic Information</h2>
+                <div class="form-group">
+                    <label for="province">Province/Territory:</label>
+                    <select id="province" name="province">
+                        <option value="">Select Province/Territory</option>
+                        <option value="AB">Alberta</option>
+                        <option value="BC">British Columbia</option>
+                        <option value="MB">Manitoba</option>
+                        <option value="NB">New Brunswick</option>
+                        <option value="NL">Newfoundland and Labrador</option>
+                        <option value="NT">Northwest Territories</option>
+                        <option value="NS">Nova Scotia</option>
+                        <option value="NU">Nunavut</option>
+                        <option value="ON">Ontario</option>
+                        <option value="PE">Prince Edward Island</option>
+                        <option value="QC">Quebec</option>
+                        <option value="SK">Saskatchewan</option>
+                        <option value="YT">Yukon</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="income">Annual Income ($):</label>
+                    <input type="number" id="income" name="income" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="amountToMove">Amount to Move ($):</label>
+                    <input type="number" id="amountToMove" name="amountToMove" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label>Have you purchased a home before?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="homePurchase" value="no" checked>
+                            No (First-time home buyer)
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="homePurchase" value="yes">
+                            Yes
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Part 2: Existing Contributions -->
+            <section class="input-section" id="part2">
+                <h2>Part 2: Existing Contributions & Details</h2>
+                
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="18" max="120" placeholder="18">
+                    <small class="help-text">Must be 18 or older to have contribution room for TFSA, RRSP, FHSA, and RESP</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="tfsaTotalContributions">Total TFSA Contributions to Date ($):</label>
+                    <input type="number" id="tfsaTotalContributions" name="tfsaTotalContributions" min="0" step="100" placeholder="0">
+                    <small class="help-text">Total lifetime contributions to your TFSA</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="tfsaContributions">TFSA Contributions This Year ($):</label>
+                    <input type="number" id="tfsaContributions" name="tfsaContributions" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="fhsaContributions">FHSA Contributions This Year ($):</label>
+                    <input type="number" id="fhsaContributions" name="fhsaContributions" min="0" step="100" placeholder="0">
+                    <small class="help-text">Only applicable if you are a first-time home buyer</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="income2024">2024 Income ($):</label>
+                    <input type="number" id="income2024" name="income2024" min="0" step="100" placeholder="0">
+                    <small class="help-text">RRSP room is calculated by multiplying your previous year income by 18% up to an annual maximum</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="rrspContributions">RRSP Contributions This Year ($):</label>
+                    <input type="number" id="rrspContributions" name="rrspContributions" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyMatch">Company-Matched RRSP ($):</label>
+                    <input type="number" id="companyMatch" name="companyMatch" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="rrspCarryForward">RRSP Carry-Forward Room ($):</label>
+                    <input type="number" id="rrspCarryForward" name="rrspCarryForward" min="0" step="100" placeholder="0">
+                </div>
+
+                <div class="form-group">
+                    <label for="numChildren">Number of Children:</label>
+                    <input type="number" id="numChildren" name="numChildren" min="0" max="20" placeholder="0">
+                </div>
+
+                <div class="form-group" id="respGroup" style="display: none;">
+                    <label for="respContributions">RESP Contributions This Year ($):</label>
+                    <input type="number" id="respContributions" name="respContributions" min="0" step="100" placeholder="0">
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="output-section" id="output">
+                <h2>Optimization Results</h2>
+                
+                <div id="recommendations" class="recommendations">
+                    <p class="placeholder">Enter your information above to see recommendations</p>
+                </div>
+
+                <div id="taxRate" class="tax-rate">
+                    <p class="placeholder">Effective tax rate will appear here</p>
+                </div>
+
+                <div id="taxBreakdown" class="tax-breakdown">
+                    <h3>Tax & Deduction Breakdown</h3>
+                    <div id="pieChartContainer" class="pie-chart-container">
+                        <canvas id="pieChart" width="300" height="300"></canvas>
+                        <div id="pieChartLegend" class="pie-chart-legend">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+                    <div id="taxBreakdownText" class="breakdown-text">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+
+                <div class="input-summary">
+                    <h3>Input Summary (Editable)</h3>
+                    <div id="inputSummary" class="summary-grid">
+                        <!-- Dynamically populated -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="contribution-limits.js"></script>
+    <script src="tax-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
