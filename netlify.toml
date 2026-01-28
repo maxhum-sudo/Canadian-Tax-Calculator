@@ -1,6 +1,6 @@
 [build]
   # No build command needed - this is a static site
   command = ""
-  # Publish directory is the subfolder where index.html is located
-  publish = "Canada tax account optimizer"
+  # Publish directory is the root where index.html is located
+  publish = "."
 
